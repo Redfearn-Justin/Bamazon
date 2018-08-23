@@ -1,4 +1,3 @@
-
 //everything below is from greatbay DB exercise
 
 var mysql = require("mysql");
@@ -8,13 +7,10 @@ var inquirer = require("inquirer");
 var connection = mysql.createConnection({
   host: "localhost",
 
-  // Your port; if not 3306
   port: 3306,
 
-  // Your username
   user: "root",
 
-  // Your password
   password: "password",
   database: "bamazonDB" 
 });
@@ -28,27 +24,51 @@ connection.connect(function(err) {
 
 // function which prompts the user for what action they should take
 function start() {
-  
-  var questions = {
-    name: "postOrBid",
-    type: "rawlist",
-    message: "Would you like to [POST] an auction or [BID] on an auction?",
-    choices: ["POST", "BID", "EXIT"]
-  };
 
-  inquirer.prompt(questions).then(function(answer) {
-      // based on their answer, either call the bid or the post functions
-      if (answer.postOrBid.toUpperCase() === "POST") {
-        postAuction();
-      }
-      else if(answer.postOrBid.toUpperCase() === "BID") {
-        bidAuction();
-      } else {
-        // Exit
-        connection.end();
-        return;
-      }
+  connection.query("SELECT item_id, product_name, price FROM products", function(err, results) {
+    if (err) throw err;
+
+    //array variable for items in stock
+    var itemsArray = [];
+
+    for (var j = 0; j < results.length; j++) {
+      itemsArray.push(results[j].item_id + ": " + results[j].product_name + "  " + results[j].price);
+    }
+
+    var firstQuestion = {
+      name: "firstQuestion",
+      type: "rawlist",
+      message: "Welcome To Bamazon!\nHere are the items we have in stock\nWhich one would you like to purchase?",
+      choices: itemsArray
+    }
+    console.log(itemsArray);
+
+    inquirer.prompt(firstQuestion).then(function(response) {
+      console.log(response);
+
     });
+  });
+  
+  // var questions = {
+  //   name: "postOrBid",
+  //   type: "rawlist",
+  //   message: "Would you like to [POST] an auction or [BID] on an auction?",
+  //   choices: ["POST", "BID", "EXIT"]
+  // };
+
+  // inquirer.prompt(questions).then(function(answer) {
+  //     // based on their answer, either call the bid or the post functions
+  //     if (answer.postOrBid.toUpperCase() === "POST") {
+  //       postAuction();
+  //     }
+  //     else if(answer.postOrBid.toUpperCase() === "BID") {
+  //       bidAuction();
+  //     } else {
+  //       // Exit
+  //       connection.end();
+  //       return;
+  //     }
+  //   });
 }
 
 // function to handle posting new items up for auction

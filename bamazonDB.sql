@@ -12,4 +12,4 @@ CREATE TABLE products (
 );
 
 INSERT INTO products (product_name, department_name, price)
-VALUES ('Playstation 4 Pro', 'Video Games Consoles', 329.99), ('Playstation 4 (Standard)', 'Video Game Consoles', 299.99) ('Persona 5', 'Video Games', 49.99), ('Anthem', 'Video Games', 59.99), ('Superior Spiderman Vol 1 & 2', 'Comic Books', 40.99), ('Red Hood and The Outlaws Vol 1', 'Comic Books', 12.99), ('The Boy and The Beast', 'Animated Movies', 19.99), ('Your Name', 'Animated Movies', 19.99), ('"False Idol" - Veil Of Maya', 'Albums', 9.99), ('"All Our Gods Have Abandoned Us" - Architects', 'Albums', 9.99)
+VALUES ('Playstation 4 Pro', 'Video Games Consoles', 329.99), ('Playstation 4 (Standard)', 'Video Game Consoles', 299.99) ('Persona 5', 'Video Games', 49.99), ('Shadow Of The Tomb Raider', 'Video Games', 59.99), ('Superior Spiderman Vol 1 & 2', 'Comic Books', 40.99), ('Red Hood and The Outlaws Vol 1', 'Comic Books', 12.99), ('The Boy and The Beast', 'Animated Movies', 19.99), ('Your Name', 'Animated Movies', 19.99), ('"False Idol" - Veil Of Maya', 'Albums', 9.99), ('"All Our Gods Have Abandoned Us" - Architects', 'Albums', 9.99)
