@@ -30,7 +30,7 @@ connection.connect(function(err) {
 // function which prompts the user for what action they should take
 function start() {
 
-  connection.query("SELECT item_id, product_name, price FROM products", function(err, results) {
+  connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function(err, results) {
     if (err) throw err;
 
     //array variable for items in stock
@@ -62,43 +62,43 @@ function start() {
 
         var selectedItem;
 
+        var parsedSecondAnswer = parseInt(answer.secondQuestion);
+
         //matching selected item's id with that of id in DB
 
         var components = answer.firstQuestion.trim().split(":");
 
-        //verified that 'components' is split correctly
-        console.log(components);
 
         for (var j = 0; j < results.length; j++) {
 
           if(results[j].item_id === parseInt(components[0])) {
 
             selectedItem = results[j];
+
           }
         }
 
-        //verified that the 'selectedItem' variable is grabbing the chosen item
-        console.log(selectedItem);
+        if(selectedItem.stock_quantity > parsedSecondAnswer) {
 
-        //ERROR: IF statement will not run but Else statement will (something wrong with variables in the If statement: conjecture)
+          console.log("yassss, it worked");
 
-        if(selectedItem.stock_quantity < parseInt(answer.secondQuestion)) {
-          connection.query(
-            "UPDATE products SET ? WHERE ?",
-            [
-              {
-                stock_quantity: answer.secondQuestion
-              }
-              // {
-              //   item_id: selectedItem.item_id
-              // }
-            ],
-            function(error) {
+          var quantityDesired = stock_quantity -= parseInt(answer.secondQuestion);
+
+          console.log(quantityDesired);
+
+          connection.query("UPDATE products SET ? WHERE ?",[{stock_quantity: quantityDesired}], function(error) {
+            // [
+            //   {
+            //     stock_quantity: answer.secondQuestion
+            //   }
+            // ],
+            // function(error) {
+
               if(error) throw error;
 
               console.log("Your order for " + answer.firstQuestion + " has been successfully received! :)");
 
-              var totalBill = parseInt(answer.secondQuestion) * parseFloat(selectedItem.price);
+              var totalBill = parsedSecondAnswer * parseFloat(selectedItem.price);
 
               console.log("\n\nTotal price of your order: $" + totalBill);
 
@@ -107,10 +107,12 @@ function start() {
             }
           ); //connection query close
         } // if statement close
+
         else {
           //not enough in stock, so notify customer of this
-          console.log("We're sorry, it looks like your ambitious order was too much for our stockpile :(\nTry again please!");
-          start();
+          console.log("We're sorry, it looks like your ambitious order was too much for our stockpile :(\n\nTry again please!");
+          // start();
+          connection.end();
         }
       });
   }); // connection query close
