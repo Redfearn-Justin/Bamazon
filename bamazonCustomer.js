@@ -80,11 +80,11 @@ function start() {
 
         // IF-ELSE statement checking if there's enough in stock to match the quantity ordered 
 
-        if(selectedItem.stock_quantity > parsedSecondAnswer) {
+        if(selectedItem.stock_quantity >= parsedSecondAnswer) {
 
-          var quantityDesired = selectedItem.stock_quantity -= parseInt(answer.secondQuestion);
+          var quantityLeft = selectedItem.stock_quantity -= parseInt(answer.secondQuestion);
 
-          connection.query("UPDATE products SET ? WHERE ?",[{stock_quantity: quantityDesired}], function() {
+          connection.query("UPDATE products SET stock_quantity = " + quantityLeft + " WHERE item_id = " + selectedItem.item_id, function() {
 
               console.log("\nYour order for " + selectedItem.product_name + " has been successfully received! :)\n");
 
