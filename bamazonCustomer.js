@@ -84,8 +84,6 @@ function start() {
 
           var quantityDesired = selectedItem.stock_quantity -= parseInt(answer.secondQuestion);
 
-          console.log(quantityDesired);
-
           connection.query("UPDATE products SET ? WHERE ?",[{stock_quantity: quantityDesired}], function() {
 
               console.log("\nYour order for " + selectedItem.product_name + " has been successfully received! :)\n");
