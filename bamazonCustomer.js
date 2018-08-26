@@ -44,13 +44,13 @@ function start() {
       {
         name: "firstQuestion",
         type: "list",
-        message: "Welcome To Bamazon!\nHere are the items we have in stock\nWhich one would you like to purchase?\n",
+        message: "Welcome To Bamazon, 007. This is Q.\nEverything you'll need for your next Operation is here.\nPlease, select any item you'd like to take with you on the field\n\n",
         choices: itemsArray
       },
       {
         name: "secondQuestion",
         type: "input",
-        message: "\nGreat choice!\n\nHow many would you like to purchase today?\n",
+        message: "\nWonderful selection, it won't fail you.\n\nNow, how many would you be interested in?\n",
         validate: function(value) {
           if (isNaN(value) === false) {
             return true;
@@ -87,12 +87,13 @@ function start() {
           //grabbing quantity from DB and updating it to reflect the amount after purchase
           connection.query("UPDATE products SET stock_quantity = " + quantityLeft + " WHERE item_id = " + selectedItem.item_id, function() {
 
-              console.log("\nYour order for " + selectedItem.product_name + " has been successfully received! :)\n");
-              
+              console.log("\nYour order for " + parsedSecondAnswer + " " +  selectedItem.product_name + " have been received!\n");
+              console.log("You'll find your item(s) at an undisclosed location near the closest safehouse\n\n");
+
               //variable to grab total costs of item(s) purchased
               var totalBill = parsedSecondAnswer * parseFloat(selectedItem.price);
 
-              console.log("\n\nTotal price of your order: $" + totalBill + "\n\n");
+              console.log("\n\nTotal price of your order: $" + totalBill + "\nIt was a pleasure doing business with you, 007.\nPlease do try to bring your items back in one piece.\n\n");
 
               //Loop through the function again
               start();
@@ -105,7 +106,7 @@ function start() {
         else {
 
           //not enough in stock, so notify customer of this
-          console.log("\nWe're sorry, it looks like your ambitious order was too much for our stockpile :(\n\nTry again please!\n\n");
+          console.log("\nApologies, seems like other agents have taken a liking to that item, as we're out of stock.\n\nI Implore you to try again\n\n");
 
 
           //Loop through the function again
