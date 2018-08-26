@@ -19,26 +19,26 @@
 
 * Open up GIT BASH and/or terminal and **go** into the same directory where all the other "bamazon" files are located.
 
-![Step One](Images/capture1.png)
+![Step One](Images/Capture1.PNG)
 
 ### Step Two
 
 * In your "command line" application, type `node bamazonCustomer.js`
 
-![Step Two](Images/capture2.png)
+![Step Two](Images/Capture2.PNG)
 
 
 ### Step Three
 
 * After doing so, and a few seconds, the storefront will appear and prompt for you to select any item of your choosing. Press **`Enter`** to confrim your selection (i.e., in this case, I chose the ever-reliable Ballpoint Pen Bomb). 
 
-![Step Three](Images/capture3.png)
+![Step Three](Images/Capture3.PNG)
 
 ### Step Four
 
 * You'll now be prompted to enter the number of units of selected item you'd like to receive. As much as I would like for you to embellish your mission needs, please be considerate of our finite quantities. _This isn't a video game_ (i.e., in this case, I simply typed **`2`**, for 2 Ballpoint Pen Bombs)
 
-![Step Four](Images/capture4.png)
+![Step Four](Images/Capture4.PNG)
 
 
 ## The proprietary Bamazon software will now "go and see" if the store has enough units for your order
@@ -51,7 +51,7 @@
 * A confirmation page will show up to verify your order, including: the number of units ordered, the item ordered, and the total amount to be paid.
 * The application will automatically refresh, in case you'd like to purchase more items for your mission.
 
-![Successful](Images/capture5a.png)
+![Successful](Images/Capture5a.PNG)
 
 
 ### **IF THERE WASN'T ENOUGH UNITS IN STOCK** 
@@ -62,7 +62,7 @@
 * While this does not happen often, there are times where this will.
 * The applcation will automatically refresh, in case you'd like to try again, perchance with a lower quantity.
 
-![Unsuccessful](Images/capture5b.png)
+![Unsuccessful](Images/Capture5b.PNG)
 
 ### Now go out there, and make MI6 proud, 007. 
 
