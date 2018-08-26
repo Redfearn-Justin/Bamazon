@@ -24,10 +24,10 @@ connection.connect(function(err) {
   start();
 });
 
+
 //functions
 
 
-// function which prompts the user for what action they should take
 function start() {
 
   connection.query("SELECT item_id, product_name, price, stock_quantity FROM products", function(err, results) {
@@ -44,19 +44,19 @@ function start() {
       {
         name: "firstQuestion",
         type: "list",
-        message: "Welcome To Bamazon!\nHere are the items we have in stock\nWhich one would you like to purchase?",
+        message: "Welcome To Bamazon!\nHere are the items we have in stock\nWhich one would you like to purchase?\n",
         choices: itemsArray
       },
       {
         name: "secondQuestion",
         type: "input",
-        message: "\nGreat choice!\n\nHow many would you like to purchase today?",
-        // validate: function(value) {
-        //   if (isNaN(value) === false) {
-        //     return true;
-        //   }
-        //   return false;
-        // }
+        message: "\nGreat choice!\n\nHow many would you like to purchase today?\n",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
       }
       ]).then(function(answer) {
 
@@ -78,43 +78,41 @@ function start() {
           }
         }
 
+        // IF-ELSE statement checking if there's enough in stock to match the quantity ordered 
+
         if(selectedItem.stock_quantity > parsedSecondAnswer) {
 
-          console.log("yassss, it worked");
-
-          var quantityDesired = stock_quantity -= parseInt(answer.secondQuestion);
+          var quantityDesired = selectedItem.stock_quantity -= parseInt(answer.secondQuestion);
 
           console.log(quantityDesired);
 
-          connection.query("UPDATE products SET ? WHERE ?",[{stock_quantity: quantityDesired}], function(error) {
-            // [
-            //   {
-            //     stock_quantity: answer.secondQuestion
-            //   }
-            // ],
-            // function(error) {
+          connection.query("UPDATE products SET ? WHERE ?",[{stock_quantity: quantityDesired}], function() {
 
-              if(error) throw error;
-
-              console.log("Your order for " + answer.firstQuestion + " has been successfully received! :)");
+              console.log("\nYour order for " + selectedItem.product_name + " has been successfully received! :)\n");
 
               var totalBill = parsedSecondAnswer * parseFloat(selectedItem.price);
 
-              console.log("\n\nTotal price of your order: $" + totalBill);
+              console.log("\n\nTotal price of your order: $" + totalBill + "\n\n");
 
               //start the app all over again
               start();
+
             }
           ); //connection query close
+
         } // if statement close
 
         else {
+
           //not enough in stock, so notify customer of this
-          console.log("We're sorry, it looks like your ambitious order was too much for our stockpile :(\n\nTry again please!");
-          // start();
-          connection.end();
+
+          console.log("\nWe're sorry, it looks like your ambitious order was too much for our stockpile :(\n\nTry again please!\n\n");
+
+          start();
         }
+
       });
+
   }); // connection query close
 
 } //function "start" close
