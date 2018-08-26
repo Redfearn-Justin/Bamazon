@@ -84,15 +84,17 @@ function start() {
 
           var quantityLeft = selectedItem.stock_quantity -= parseInt(answer.secondQuestion);
 
+          //grabbing quantity from DB and updating it to reflect the amount after purchase
           connection.query("UPDATE products SET stock_quantity = " + quantityLeft + " WHERE item_id = " + selectedItem.item_id, function() {
 
               console.log("\nYour order for " + selectedItem.product_name + " has been successfully received! :)\n");
-
+              
+              //variable to grab total costs of item(s) purchased
               var totalBill = parsedSecondAnswer * parseFloat(selectedItem.price);
 
               console.log("\n\nTotal price of your order: $" + totalBill + "\n\n");
 
-              //start the app all over again
+              //Loop through the function again
               start();
 
             }
@@ -103,9 +105,10 @@ function start() {
         else {
 
           //not enough in stock, so notify customer of this
-
           console.log("\nWe're sorry, it looks like your ambitious order was too much for our stockpile :(\n\nTry again please!\n\n");
 
+
+          //Loop through the function again
           start();
         }
 
