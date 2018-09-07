@@ -30,7 +30,10 @@
 
 ### Step Three
 
-* After doing so, and a few seconds, the storefront will appear and prompt for you to select any item of your choosing. Press **`Enter`** to confrim your selection (i.e., in this case, I chose the ever-reliable Ballpoint Pen Bomb). 
+* After doing so, and a few seconds, the storefront will appear and prompt for you to select any item of your choosing (__see first image below__). Press **`Enter`** to confrim your selection (i.e., in this case, I chose the ever-reliable Ballpoint Pen Bomb).
+
+![First Image](Images/Capture0.PNG)
+
 
 ![Step Three](Images/Capture3.PNG)
 
