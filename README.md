@@ -5,11 +5,18 @@
 
 ## Overview
 
+### Project Insight
+
 * Bamazon is your all-in-one "storefront" for everything an agent will need on a mission-to-mission basis.
 * Using the latest technology in Web Development, this ultra-secure application consists of Node.js, MySQL, and a dash of CMD/Terminal
 * Feel free to call it "Bondmazon"
 
-# Instructions
+### Technologies Utilized
+
+* **Backend**: Node.js, Inquirer (Node Package), SQL
+* **Other**: CLI & MySQL
+
+## Instructions
 
 ## Customer(Agent)-level
 
@@ -44,7 +51,7 @@
 ![Step Four](Images/Capture4.PNG)
 
 
-## The proprietary Bamazon software will now "go and see" if the store has enough units for your order
+### The proprietary Bamazon software will now "go and see" if the store has enough units for your order
 
 
 ### **IF THERE ARE/IS ENOUGH UNITS IN STOCK** 
@@ -68,7 +75,5 @@
 ![Unsuccessful](Images/Capture5b.PNG)
 
 ### Now go out there, and make MI6 proud, 007. 
-
-#
 
 ![James Bond Outro](https://media.giphy.com/media/QisABPo52RNok/giphy.gif)
